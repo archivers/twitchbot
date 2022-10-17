@@ -14,10 +14,9 @@ bot = commands.Bot(
 async def event_ready():
     'Called once when the bot goes online.'
     print(f"{os.environ['BOT_NICK']} is online!")
-    await bot.get_channel("duckyobrien").send("/me I have arrived")
 
 @bot.event()
-async def event_join(channel, user):
+async def event_channel_joined(channel):
     await channel.send("/me I have arrived")
 
 @bot.event()
@@ -29,6 +28,13 @@ async def event_message(ctx):
 
     if 'hello' in ctx.content.lower():
         await ctx.channel.send(f"Hi, @{ctx.author.name}!")
+
+@bot.command(name='join')
+async def join(ctx):
+    #target_channel = ctx.message.content.replace('!join', '').strip()
+    #print(target_channel)
+    print(ctx.message.content)
+    #await bot.join_channels([target_channel])
 
 @bot.command(name='test')
 async def test(ctx):
