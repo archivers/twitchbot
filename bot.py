@@ -23,6 +23,7 @@ async def event_channel_joined(channel):
 async def event_message(ctx):
     'Runs every time a message is sent in chat.'
     # make sure the bot ignores itself and the streamer
+    #fix from Raticide, thanks Rat! 10/24/2022 - 20:04
     if ctx.author is None:
         return
     elif ctx.author.name.lower() == os.environ['BOT_NICK'].lower():
