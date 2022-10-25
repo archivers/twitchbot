@@ -23,11 +23,13 @@ async def event_channel_joined(channel):
 async def event_message(ctx):
     'Runs every time a message is sent in chat.'
     # make sure the bot ignores itself and the streamer
-    #if ctx.author.name.lower() == os.environ['BOT_NICK'].lower():
-        #return
+    if ctx.author is None:
+        return
+    elif ctx.author.name.lower() == os.environ['BOT_NICK'].lower():
+        return
 
     if 'hello' in ctx.content.lower():
-        await ctx.channel.send(f"Hi, @{ctx.author.name}!")
+        await ctx.channel.send(f"hello, @{ctx.author.name}!")
 
 @bot.command(name='join')
 async def join(ctx):
@@ -46,6 +48,10 @@ async def modcheck(ctx):
         await ctx.send(f"@{ctx.author.name} is a mod!")
     else:
         await ctx.send(f"@{ctx.author.name} is not a mod!")
+
+@bot.command(name='whisper')
+async def whisper(ctx):
+   await ctx.author.send("hello")
 
 if __name__ == "__main__":
     bot.run()
